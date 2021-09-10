@@ -1,6 +1,7 @@
-import { getRandomNumber } from "./utility.js"
+// import { getRandomNumber } from "./utility.js"
 
-export default class Note {
+// export default class Note {
+class Note {
     isHit = false;
     isMiss = false;
 

@@ -1,4 +1,5 @@
-export default class Canvas {
+// export default class Canvas {
+class Canvas {
     constructor(width, height, numberCanvas) {
         this.canvas = document.querySelector(`.canvas${numberCanvas}`);
 

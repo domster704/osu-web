@@ -1,18 +1,6 @@
-import Application from "./Application.js";
-import Note from "./Note.js";
-import { getRandomNumber } from "./utility.js"
-// import { clear, getRandomNumber } from "./utility.js"
-// import { context, context2, context3, canvas, canvas2, canvas3 } from "./Canvas.js";
-
-// const AR = 2.4;
-
-// let countHits = 0;
-// let countMiss = 0;
-
-// let time = [];
-// let fps = 60;
-
-// let note = new Note(getRandomNumber(200, canvas.width - 200), getRandomNumber(100, canvas.height - 100), 1000, AR, fps);
+// import Application from "./Application.js";
+// import Note from "./Note.js";
+// import { getRandomNumber } from "./utility.js"
 
 // // Создать кнопку, при нажатии на которую будет воспроизводиться звук
 // const mainAudio = new Audio();
@@ -22,54 +10,11 @@ import { getRandomNumber } from "./utility.js"
 // mainAudio.src = '../data/audio/mainAudio.mp3';
 // mainAudio.play();
 
-// let back = new Image();
-// back.src = "../data/image/background/back.jpg";
-
-// context2.drawImage(back, canvas2.width / 2 - back.width / 2, canvas2.height / 2 - back.height / 2);
-// // context2.drawImage(back, 0, 0);
-
-// function animation() {
-//     requestAnimationFrame(animation);
-//     clear();
-//     context2.drawImage(back, canvas2.width / 2 - back.width / 2, canvas2.height / 2 - back.height / 2);
-//     context2.fillStyle = 'rgba(17, 17, 17, 0.75)';
-//     context2.fillRect(0, 0, canvas2.width, canvas2.height);
-
-//     (function getFPS() {
-//         const now = performance.now();
-//         while (time.length > 0 && time[0] < now - 1000) {
-//             time.shift();
-//         }
-
-//         time.push(now);
-//         fps = time.length;
-//     })();
-
-//     if (note) {
-//         context.beginPath();
-//         note.draw();
-
-//         // После мисса или хита надо увеличить жизненный цикл ноты, для отображения попадания или промаха
-//         switch (note.getStatus(cursor.mousePos)) {
-//             case 'hit':
-//                 note = new Note(getRandomNumber(200, canvas.width - 200), getRandomNumber(100, canvas.height - 100), 1000, AR, fps);
-//                 countHits++;
-//                 break;
-//             case 'miss':
-//                 note = new Note(getRandomNumber(200, canvas.width - 200), getRandomNumber(100, canvas.height - 100), 1000, AR, fps);
-//                 countMiss++;
-//                 break;
-//         }
-//     }
-
-//     context.font = "30px Arial";
-//     context.fillStyle = "white";
-//     context.fillText(`Hits: ${countHits}`, 100, 40)
-//     context.fillText(`Miss: ${countMiss}`, 100, 80)
-//     cursor.draw();
-// }
-
-// const cursor = new Cursor(animation);
+// context.font = "30px Arial";
+// context.fillStyle = "white";
+// context.fillText(`Hits: ${countHits}`, 100, 40)
+// context.fillText(`Miss: ${countMiss}`, 100, 80)
+// cursor.draw();
 
 const app = new Application({
     width: window.innerWidth,

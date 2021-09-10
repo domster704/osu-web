@@ -1,4 +1,5 @@
-export default class Map {
+// export default class Map {
+class Map {
     constructor(...arg) {
         this.mapParams = {
             cs: 4.0,

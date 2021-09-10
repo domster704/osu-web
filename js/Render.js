@@ -1,4 +1,5 @@
-export default class Render {
+// export default class Render {
+class Render {
     static create(...args) {
         return new Render(...args);
     }
