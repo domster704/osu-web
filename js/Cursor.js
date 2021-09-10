@@ -1,7 +1,6 @@
 // import { context, context2, context3, canvas, canvas2, canvas3 } from "./Canvas.js";
 
-// export default class Cursor {
-class Cursor {
+export default class Cursor {
     trail = [];
     TRAIL_LENGTH = 25;
     canvas = null;

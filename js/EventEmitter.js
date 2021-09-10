@@ -1,7 +1,6 @@
 const has = (a, b) => Object.prototype.hasOwnProperty.call(a, b);
 
-// export default class EventEmitter {
-class EventEmitter {
+export default class EventEmitter {
     handlers = {};
 
     addEventListener(name, handler) {

@@ -1,10 +1,9 @@
-// import Canvas from "./Canvas.js";
-// import Render from "./Render.js";
-// import EventEmitter from "./EventEmitter.js";
-// import Cursor from "./Cursor.js";
+import Canvas from "./Canvas.js";
+import Render from "./Render.js";
+import EventEmitter from "./EventEmitter.js";
+import Cursor from "./Cursor.js";
 
-// export default class Application extends EventEmitter {
-class Application extends EventEmitter {
+export default class Application extends EventEmitter {
     render = null;
     cursor = null;
 

@@ -13,90 +13,20 @@
         <canvas class="canvas2"></canvas>
     </div>
     
-    <!-- <script src="js/Canvas.js" type="module"></script>
+    <script src="js/Canvas.js" type="module"></script>
     <script src="js/Note.js" type="module"></script>
     <script src="js/utility.js" type="module"></script>
     <script src="js/Map.js" type="module"></script>
     <script src="js/Cursor.js" type="module"></script>
-    <script src="js/main.js" type="module"></script> -->
-    
-    <script>
-        const has = (a, b) => Object.prototype.hasOwnProperty.call(a, b);
-        class EventEmitter {
-            handlers = {};
-        
-            addEventListener(name, handler) {
-                if (!has(this.handlers, name)) {
-                    this.handlers[name] = [];
-                }
-                
-                this.handlers[name].push(handler);
-            }
-        
-            on(...args) {
-                return this.addEventListener(...args);
-            }
-        
-            emit(name, ...data) {
-                if (this.handlers[name]) {
-                    for (const handler of this.handlers[name]) {
-                        handler(...data);
-                    }
-                }
-            }
-        }
+    <script src="js/main.js" type="module"></script>
 
-        class Application extends EventEmitter {
-            render = null;
-            cursor = null;
-        
-            container = [];
-            fps = 60;
-        
-            constructor(props) {
-                super();
-        
-                this.canvas = Canvas.create(props.width, props.height, 1);
-                this.canvas2 = Canvas.create(props.width, props.height, 2);
-                
-                this.render = Render.create();
-                this.cursor = Cursor.create(this.canvas);
-        
-                this.time = [];
-                this.tick();
-            }
-        
-            tick() {       
-                this.render.clear(this.canvas);
-                this.render.renderObjects(this.canvas, this.container);
-        
-                (() => {
-                    const now = performance.now();
-                    while (this.time.length > 0 && this.time[0] < now - 1000) {
-                        this.time.shift();
-                    }
-            
-                    this.time.push(now);
-                    this.fps = this.time.length < 60 ? 60 : this.time.length;
-                })();
-        
-                this.emit('update');
-                
-                this.cursor.draw();
-                requestAnimationFrame(() => this.tick()); 
-            }
-        
-        }
-    </script>
-
-    <script src="js/Canvas.js"></script>
-    <script src="js/Render.js"></script>
+    <!-- <script src="js/Canvas.js"></script>
     <script src="js/EventEmitter.js"></script>
     <script src="js/Applicaton.js"></script>
     <script src="js/Note.js"></script>
     <script src="js/utility.js"></script>
     <script src="js/Map.js"></script>
     <script src="js/Cursor.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.js"></script> -->
 </body>
 </html>

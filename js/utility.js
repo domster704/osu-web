@@ -10,7 +10,6 @@
 //     context.clearRect(0, 0, canvas.width, canvas.height);
 // }
 
-// export function getRandomNumber(min, max) {
-function getRandomNumber(min, max) {
+export function getRandomNumber(min, max) {
     return Math.random() * (max - min) + min
 }

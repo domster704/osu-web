@@ -1,6 +1,6 @@
-// import Application from "./Application.js";
-// import Note from "./Note.js";
-// import { getRandomNumber } from "./utility.js"
+import Application from "./Application.js";
+import Note from "./Note.js";
+import { getRandomNumber } from "./utility.js"
 
 // // Создать кнопку, при нажатии на которую будет воспроизводиться звук
 // const mainAudio = new Audio();
@@ -25,9 +25,12 @@ const config = {
     ar: 3,
 };
 
-let note = new Note(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps);
-let note2 = new Note(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps);
-let note3 = new Note(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps);
+let noteList = [];
+for (let i = 0; i < 5; i++) {
+    noteList.push(
+        new Note(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps)
+    );
+}
 
 const backgroundImage = new Image();
 backgroundImage.src = "../data/image/background/back.jpg";
@@ -64,14 +67,8 @@ function reStatNote(note) {
 
 
 app.on('update', () => {
-    if (reStatNote(note)) {
-        note = reStatNote(note);
-    }
-    if (reStatNote(note2)) {
-        note2 = reStatNote(note2);
-    }
-    if (reStatNote(note3)) {
-        note3 = reStatNote(note3);
+    for (let i in noteList) {
+        if (reStatNote(noteList[i])) noteList[i] = reStatNote(noteList[i]);
     }
     // if (note2) {
     //     note2.draw(app.canvas);
