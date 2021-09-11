@@ -22,10 +22,10 @@ export default class Note {
         this.ar = ar / (this.fps / 60);
 
         this.hitAudio = new Audio();
-        this.hitAudio.volume = 0.2;
+        this.hitAudio.volume = 0.1;
         this.hitAudio.autoplay = false;
-        this.hitAudio.src = 'data/audio/TongueMushroom.wav';
-        // this.hitAudio.src = 'data/audio/hit.ogg';
+        // this.hitAudio.src = 'data/audio/TongueMushroom.wav';
+        this.hitAudio.src = 'data/audio/hit.ogg';
 
         this.mainImg = new Image();
         this.mainImg.src = 'data/image/note/hitcircle.png';
