@@ -1,20 +1,16 @@
 import Application from "./Application.js";
-import Note from "./Note.js";
-import { getRandomNumber } from "./utility.js"
+import Note from "./GameObjects/Note.js";
+import {getRandomNumber, hexToRGB} from "./utility.js"
 
 // // Создать кнопку, при нажатии на которую будет воспроизводиться звук
 // const mainAudio = new Audio();
 // mainAudio.volume = 0.01;
 // mainAudio.autoplay = true;
 // mainAudio.muted = true;
-// mainAudio.src = '../data/audio/mainAudio.mp3';
+// mainAudio.src = 'data/audio/mainAudio.mp3';
 // mainAudio.play();
 
-// context.font = "30px Arial";
-// context.fillStyle = "white";
-// context.fillText(`Hits: ${countHits}`, 100, 40)
-// context.fillText(`Miss: ${countMiss}`, 100, 80)
-// cursor.draw();
+let hitCount = 0;
 
 const app = new Application({
     width: window.innerWidth,
@@ -27,13 +23,14 @@ const config = {
 
 let noteList = [];
 for (let i = 0; i < 5; i++) {
-    noteList.push(
-        new Note(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps)
-    );
+    noteList.push({
+        note: Note.create(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
+        status: ''
+    });
 }
 
 const backgroundImage = new Image();
-backgroundImage.src = "../data/image/background/back.jpg";
+backgroundImage.src = "data/image/background/back.jpg";
 
 app.on('update', () => {
     app.canvas2.context.beginPath();
@@ -43,54 +40,69 @@ app.on('update', () => {
 });
 
 
-function reStatNote(note) {
-    if (note) {
-        note.draw(app.canvas);
-        switch (note.getStatus(app.cursor.mousePos)) {
-            case 'hit':
-                // 
-                if (note.hitAnimate(100)) {
-                    return new Note(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps);
-                }
-                // countHits++;
-                break;
-            case 'miss':
-                // note = new Note(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps);
-                // countMiss++;
-                if (note.missAnimate(app.canvas) == true) {
-                    return new Note(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps);
-                }
-                break;
+
+function reStatNote(hitCircle) {
+    hitCircle.note.draw(app.canvas);
+
+    hitCircle.status = hitCircle.note.getStatus(app.cursor.mousePos);
+
+    if (hitCircle.status) {
+        if (hitCircle.note.resultAnimate(app.canvas, hitCircle.status)) {
+            return {
+                note: Note.create(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
+                status: ''
+            }
         }
     }
-}
 
+    // switch (hitCircle.status) {
+    //     case 'hit300' || 'hit100' || 'hit50':
+    //         if (hitCircle.note.resultAnimate(app.canvas, hitCircle.status)) {
+    //             hitCount++;
+    //             return {
+    //                 note: Note.create(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
+    //                 status: ''
+    //             }
+    //         }
+
+        // case 'hit100':
+        //     if (hitCircle.note.hit100Animate(app.canvas)) {
+        //         hitCount++;
+        //         return {
+        //             note: Note.create(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
+        //             status: ''
+        //         }
+        //     }
+        //     break;
+        // case 'hit50':
+        //     if (hitCircle.note.hit50Animate(app.canvas)) {
+        //         hitCount++;
+        //         return {
+        //             note: Note.create(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
+        //             status: ''
+        //         }
+        //     }
+        //     break;
+    //     case 'miss':
+    //         if (hitCircle.note.missAnimate(app.canvas)) {
+    //             return {
+    //                 note: Note.create(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
+    //                 status: ''
+    //             }
+    //         }
+    //         break;
+    // }
+}
 
 app.on('update', () => {
     for (let i in noteList) {
         if (reStatNote(noteList[i])) noteList[i] = reStatNote(noteList[i]);
     }
-    // if (note2) {
-    //     note2.draw(app.canvas);
-    //     switch (note2.getStatus(app.cursor.mousePos)) {
-    //         case 'hit':
-    //             if (note2.hitAnimate(100)) {
-    //                 note2 = new Note(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps);
-    //             }
-    //             // countHits++;
-    //             break;
-    //         case 'miss':
-    //             // note = new Note(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps);
-    //             // countMiss++;
-    //             if (note2.missAnimate(app.canvas) == true) {
-    //                 note2 = new Note(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps);
-    //             }
-    //             break;
-    //     }
-    // }
-    
+
+    const {context} = app.canvas;
+
+    // context.font = "30px Arial";
+    // context.fillStyle = "white";
+    // context.fillText(`Hits: ${hitCount}`, 100, 40)
+    // context.fillText(`Miss: ${countMiss}`, 100, 80)
 });
-
-
-
-

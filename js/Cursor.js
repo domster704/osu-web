@@ -1,4 +1,4 @@
-// import { context, context2, context3, canvas, canvas2, canvas3 } from "./Canvas.js";
+import {hexToRGB} from "./utility.js";
 
 export default class Cursor {
     trail = [];
@@ -11,8 +11,8 @@ export default class Cursor {
         y: 0,
         size: 15,
         color: "",
-        trailRootColor: [118, 215, 196],
-        trailEndColor: [22, 160, 133]
+        trailRootColor: hexToRGB('#FF4E50'),
+        trailEndColor: hexToRGB('#F9D423')
     };
 
     static create(...args) {
@@ -20,11 +20,12 @@ export default class Cursor {
     }
 
     constructor(canvas) {
+        console.log(this.cursor)
         this.img = new Image();
-        this.img.src = "../data/image/cursor/cursor.png";
+        this.img.src = "data/image/cursor/cursor.png";
 
         this.cursorTrail = new Image();
-        this.cursorTrail.src = "../data/image/cursor/cursortrail.png";
+        this.cursorTrail.src = "data/image/cursor/cursortrail.png";
 
         this.mousePos = {
             x: 0,
@@ -48,13 +49,9 @@ export default class Cursor {
                             canvasMap.height,
                     };
                 }
-
                 this.mousePos = getMousePosInCanvas();
-                // this.#animatePart();
             });
         };
-
-        this.last60Pos = [];
     }
 
     draw() {
@@ -84,16 +81,5 @@ export default class Cursor {
             this.context.closePath();
             this.context.fill();
         }
-
-        // this.context.beginPath();
-        // this.context.arc(
-        //     this.mousePos.x - this.CURSOR_SIZE / 2,
-        //     this.mousePos.y - this.CURSOR_SIZE / 2,
-        //     this.cursor.size,
-        //     0,
-        //     2 * Math.PI
-        // );
-        // this.context.closePath();
-        // this.context.fill();
     }
 }
