@@ -11,8 +11,6 @@ export default class Note {
     radiusDiff = 0;
     radiusOfApproachCircle = this.radius * 3;
 
-    currentKey = '';
-
     constructor(posX, posY, ar, fps) {
         this.position = {
             x: posX,
@@ -24,8 +22,8 @@ export default class Note {
         this.hitAudio = new Audio();
         this.hitAudio.volume = 0.1;
         this.hitAudio.autoplay = false;
-        // this.hitAudio.src = 'data/audio/TongueMushroom.wav';
-        this.hitAudio.src = 'data/audio/hit.ogg';
+        this.hitAudio.src = 'data/audio/tongueMushroom.wav';
+        // this.hitAudio.src = 'data/audio/hit.ogg';
 
         this.mainImg = new Image();
         this.mainImg.src = 'data/image/note/hitcircle.png';
@@ -43,8 +41,6 @@ export default class Note {
 
         this.resultImageCount = 44;
         this.resultCount = 0;
-
-        this.keyDownEvent();
     }
 
     static create(...args) {
@@ -67,12 +63,6 @@ export default class Note {
         }
     }
 
-    keyDownEvent() {
-        document.addEventListener('keydown', event => {
-            this.currentKey = event.code;
-        });
-    }
-
     #animatePart(context) {
         if (this.radiusDiff > this.radiusOfApproachCircle - this.radius) {
             this.noteStatus = 'miss';
@@ -89,7 +79,7 @@ export default class Note {
         this.radiusDiff += this.ar;
     }
 
-    getStatus(mousePos) {
+    getStatus(mousePos, app) {
         if ((this.position.x - mousePos.x) ** 2 + (this.position.y - mousePos.y) ** 2 <= this.radius ** 2 && !this.noteStatus) {
 
             let dRadius = this.radiusDiff
@@ -100,7 +90,7 @@ export default class Note {
                 else return (dRadius > remainingPart - hitRange1);
             }
 
-            if (["KeyZ", "KeyX"].includes(this.currentKey)) {
+            if (Object.values(app.keyControl.keys).includes(true)) {
                 if (range(this.hit300Range, 0)) {
                     this.noteStatus = 'hit300';
                 } else if (range(this.hit100Range, this.hit300Range)) {
@@ -108,7 +98,6 @@ export default class Note {
                 } else if (range(this.hit50Range, this.hit100Range)) {
                     this.noteStatus = 'hit50';
                 }
-                this.currentKey = '';
 
                 if (this.noteStatus) {
                     this.hitAudio.play();

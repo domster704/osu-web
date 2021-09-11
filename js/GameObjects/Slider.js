@@ -5,7 +5,7 @@ export default class Slider {
             pos2: [x2, y2]
         }
 
-        
+
     }
 
     draw() {

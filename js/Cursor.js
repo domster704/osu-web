@@ -4,7 +4,7 @@ export default class Cursor {
     trail = [];
     TRAIL_LENGTH = 25;
     canvas = null;
-    CURSOR_SIZE = 15;
+    CURSOR_SIZE = 20;
 
     cursor = {
         x: 0,
@@ -15,12 +15,7 @@ export default class Cursor {
         trailEndColor: hexToRGB('#F9D423')
     };
 
-    static create(...args) {
-        return new Cursor(...args);
-    }
-
     constructor(canvas) {
-        console.log(this.cursor)
         this.img = new Image();
         this.img.src = "data/image/cursor/cursor.png";
 
@@ -49,9 +44,14 @@ export default class Cursor {
                             canvasMap.height,
                     };
                 }
+
                 this.mousePos = getMousePosInCanvas();
             });
         };
+    }
+
+    static create(...args) {
+        return new Cursor(...args);
     }
 
     draw() {
@@ -63,6 +63,7 @@ export default class Cursor {
         });
 
         for (let i = 0; i < this.trail.length; i++) {
+
             let color = "";
             for (let j = 0; j < 3; j++) {
                 color += (Math.floor(this.cursor.trailRootColor[j] - ((this.cursor.trailRootColor[j] - this.cursor.trailEndColor[j]) / this.trail.length * i))).toString() + ','

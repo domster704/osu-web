@@ -1,6 +1,6 @@
 import Application from "./Application.js";
 import Note from "./GameObjects/Note.js";
-import {getRandomNumber, hexToRGB} from "./utility.js"
+import {getRandomNumber} from "./utility.js"
 
 // // Создать кнопку, при нажатии на которую будет воспроизводиться звук
 // const mainAudio = new Audio();
@@ -18,13 +18,13 @@ const app = new Application({
 });
 
 const config = {
-    ar: 3,
+    ar: 2,
 };
 
 let noteList = [];
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 4; i++) {
     noteList.push({
-        note: Note.create(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
+        note: Note.create(getRandomNumber(app.canvas.width - app.canvas.width / app.aspectRatio, app.canvas.width / app.aspectRatio), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
         status: ''
     });
 }
@@ -40,67 +40,39 @@ app.on('update', () => {
 });
 
 
-
 function reStatNote(hitCircle) {
     hitCircle.note.draw(app.canvas);
 
-    hitCircle.status = hitCircle.note.getStatus(app.cursor.mousePos);
+    hitCircle.status = hitCircle.note.getStatus(app.cursor.mousePos, app);
 
     if (hitCircle.status) {
         if (hitCircle.note.resultAnimate(app.canvas, hitCircle.status)) {
             return {
-                note: Note.create(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
+                note: Note.create(getRandomNumber(app.canvas.width - app.canvas.width / app.aspectRatio, app.canvas.width / app.aspectRatio), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
                 status: ''
             }
         }
     }
-
-    // switch (hitCircle.status) {
-    //     case 'hit300' || 'hit100' || 'hit50':
-    //         if (hitCircle.note.resultAnimate(app.canvas, hitCircle.status)) {
-    //             hitCount++;
-    //             return {
-    //                 note: Note.create(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
-    //                 status: ''
-    //             }
-    //         }
-
-        // case 'hit100':
-        //     if (hitCircle.note.hit100Animate(app.canvas)) {
-        //         hitCount++;
-        //         return {
-        //             note: Note.create(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
-        //             status: ''
-        //         }
-        //     }
-        //     break;
-        // case 'hit50':
-        //     if (hitCircle.note.hit50Animate(app.canvas)) {
-        //         hitCount++;
-        //         return {
-        //             note: Note.create(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
-        //             status: ''
-        //         }
-        //     }
-        //     break;
-    //     case 'miss':
-    //         if (hitCircle.note.missAnimate(app.canvas)) {
-    //             return {
-    //                 note: Note.create(getRandomNumber(200, app.canvas.width - 200), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
-    //                 status: ''
-    //             }
-    //         }
-    //         break;
-    // }
 }
 
 app.on('update', () => {
+    app.canvas.context.beginPath();
+    app.canvas.context.fillStyle = 'white';
+    app.canvas.context.moveTo(app.canvas.width - app.canvas.width / app.aspectRatio - 100, 0);
+    app.canvas.context.lineTo(app.canvas.width - app.canvas.width / app.aspectRatio - 100, app.canvas.height);
+    app.canvas.context.stroke();
+
+    app.canvas.context.beginPath();
+    app.canvas.context.fillStyle = 'white';
+    app.canvas.context.moveTo(app.canvas.width / app.aspectRatio + 100, 0);
+    app.canvas.context.lineTo(app.canvas.width / app.aspectRatio + 100, app.canvas.height);
+    app.canvas.context.stroke();
+
     for (let i in noteList) {
         if (reStatNote(noteList[i])) noteList[i] = reStatNote(noteList[i]);
     }
 
-    const {context} = app.canvas;
-
+    // const {context} = app.canvas;
     // context.font = "30px Arial";
     // context.fillStyle = "white";
     // context.fillText(`Hits: ${hitCount}`, 100, 40)

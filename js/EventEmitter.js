@@ -7,7 +7,7 @@ export default class EventEmitter {
         if (!has(this.handlers, name)) {
             this.handlers[name] = [];
         }
-        
+
         this.handlers[name].push(handler);
     }
 
