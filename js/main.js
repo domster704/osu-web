@@ -18,7 +18,7 @@ const app = new Application({
 });
 
 const config = {
-    ar: 2,
+    ar: 2.5,
 };
 
 let noteList = [];
