@@ -1,29 +1,26 @@
-html {
-    cursor: none;
-    overflow-y: hidden;
-    overflow-x: hidden;
+.popup {
+    position: fixed;
+    width: 40%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.55);
+    top: 0;
+    left: 0;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    /* background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0,0, 0.75)), url('../data/image/background/back.jpg') no-repeat center;  */
-    background-size: 100%;
-
+.popup-body {
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: #c0c0c0;
 }
 
-.canvas-layers canvas {
-    position: absolute;
+.popup-content {
+    padding: 30px;
+    min-width: 100%;
+    color: #fff;
 }
-
-.canvas1 {
-    z-index: 1;
-}
-
-.canvas2 {
-    z-index: 0;
-}
-
-/* .canvas3 {
-    z-index: 2;
-} */

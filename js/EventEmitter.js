@@ -17,8 +17,12 @@ export default class EventEmitter {
 
     emit(name, ...data) {
         if (this.handlers[name]) {
-            for (const handler of this.handlers[name]) {
-                handler(...data);
+            for (let i in this.handlers[name]) {
+                let ii = this.handlers[name][i](...data);
+                console.log(ii)
+                if (ii === 'closeFunc' && name === 'mapPlaying') {
+                    delete this.handlers[name][i];
+                }
             }
         }
     }

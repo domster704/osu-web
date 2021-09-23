@@ -1,0 +1,32 @@
+html {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    /* background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0,0, 0.75)), url('../data/image/background/back.jpg') no-repeat center;  */
+    background-size: 100%;
+
+}
+
+.canvas-layers canvas{
+    cursor: none;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+}
+
+.canvas1 {
+    z-index: 3;
+}
+
+.canvas2 {
+    z-index: 1;
+}
+
+.canvas3 {
+    /*background-color: red;*/
+    z-index: 2;
+}

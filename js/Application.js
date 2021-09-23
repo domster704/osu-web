@@ -17,7 +17,7 @@ export default class Application extends EventEmitter {
             isPress = false;
 
             constructor() {
-                this.keyList = ['KeyX', 'KeyZ', 'KeyD', 'KeyF'];
+                this.keyList = ['KeyX', 'KeyZ', 'KeyD', 'KeyF', 'KeyL', 'KeyI', 'KeyU', 'KeyK'];
                 this.keys = {};
                 addEventListener('keydown', e => {
                     this.changeKeyState(e);
@@ -47,16 +47,49 @@ export default class Application extends EventEmitter {
 
         this.canvas = Canvas.create(props.width, props.height, 1);
         this.canvas2 = Canvas.create(props.width, props.height, 2);
+        this.canvas3 = Canvas.create(props.width, props.height - props.height, 3, 4 / 3);
 
         this.render = Render.create();
-        this.cursor = Cursor.create(this.canvas);
+        this.cursor = Cursor.create(this);
 
         this.time = [];
+        this.loadDataForMap();
         this.tick();
+    }
+
+    loadDataForMap() {
+        this.resultImageCount = 44;
+
+        this.hitAudio = new Audio();
+        this.hitAudio.volume = 0.5;
+        this.hitAudio.autoplay = false;
+        this.hitAudio.src = 'data/audio/tongueMushroom.wav';
+
+        this.missImages = []
+        this.hit50Images = []
+        this.hit100Images = []
+
+        let result;
+        for (let i = 0; i <= this.resultImageCount; i++) {
+            result = new Image();
+            result.src = `data/image/note/miss/hit0-${i}.png`;
+            this.missImages.push(result);
+
+            result = new Image();
+            result.src = `data/image/note/hit50/hit50-${i}.png`;
+            this.hit50Images.push(result);
+
+            result = new Image();
+            result.src = `data/image/note/hit100/hit100-${i}.png`;
+            this.hit100Images.push(result);
+        }
     }
 
     tick() {
         this.render.clear(this.canvas);
+        this.render.clear(this.canvas2);
+        this.render.clear(this.canvas3);
+
         (() => {
             const now = performance.now();
             while (this.time.length > 0 && this.time[0] < now - 1000) {
@@ -67,9 +100,9 @@ export default class Application extends EventEmitter {
         })();
 
         this.emit('update');
+        this.emit('mapPlaying');
         this.cursor.draw();
 
         requestAnimationFrame(() => this.tick());
     }
-
 }

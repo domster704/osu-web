@@ -2,22 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="css/main.css" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/canvasStyle.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/font.css">
     <title>Osuждаю</title>
 </head>
 <body>
-<div class="canvas-layers">
-    <canvas class="canvas1"></canvas>
-    <canvas class="canvas2"></canvas>
-</div>
+    <div style="position:relative;">
+        <input type="file" id="inputFile" style="position:absolute; z-index:100;">
+        <input type="file" id="inputMusic" style="position:absolute; z-index:100; top: 40px;">
+        <button id="musicBut" style="position:absolute; top: 80px; z-index:100;">Play</button>
+        <a id="setting" href="#popup" style="position:absolute; top: 120px; z-index:100;">Setting</a>
+    </div>
 
-<script src="js/Canvas.js" type="module"></script>
-<script src="js/GameObjects/Note.js" type="module"></script>
-<script src="js/utility.js" type="module"></script>
-<script src="js/GameObjects/Map.js" type="module"></script>
-<script src="js/Cursor.js" type="module"></script>
-<script src="js/main.js" type="module"></script>
+    <audio id="music">
+        <source src="data/map/HarumachiClover/audio.mp3">
+    </audio>
+
+
+    <div class="canvas-layers">
+        <canvas class="canvas1"></canvas>
+        <canvas class="canvas2"></canvas>
+        <canvas class="canvas3"></canvas>
+    </div>
+
+
+    <div id="popup" class="popup">
+        <div class="popup-body">
+            <div class="popup-content">
+                <input type="range" id="volume" name="volume"
+                       min="0" max="11">
+                <label for="volume">Volume</label>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/Canvas.js" type="module"></script>
+    <script src="js/GameObjects/Note.js" type="module"></script>
+    <script src="js/utility.js" type="module"></script>
+    <script src="js/BeatMap/Map.js" type="module"></script>
+    <script src="js/Cursor.js" type="module"></script>
+    <script src="js/main.js" type="module"></script>
 </body>
 </html>
