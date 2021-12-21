@@ -19,7 +19,7 @@ export default class GameObject {
         this.fps = fps;
 
         // AR
-        this.ar = (this.radiusOfApproachCircle - this.radius) / ((1200 - 750 * (mapParams.ar - 5) / 5) / (1000 / this.fps));
+        this.ar = 2 * (this.radiusOfApproachCircle - this.radius) / ((1200 - 750 * (mapParams.ar - 5) / 5) / (1000 / this.fps));
         this.arV = this.ar;
 
         // OD

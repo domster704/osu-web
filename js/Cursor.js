@@ -2,9 +2,9 @@ import {hexToRGB} from "./utility.js";
 
 export default class Cursor {
     trail = [];
-    TRAIL_LENGTH = 20;
+    TRAIL_LENGTH = 15;
     canvas = null;
-    CURSOR_SIZE = 15;
+    CURSOR_SIZE = 10;
 
     cursor = {
         x: 0,

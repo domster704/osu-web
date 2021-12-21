@@ -4,7 +4,9 @@ export default class Note extends GameObject{
 
     constructor(posX, posY, fps, mapParams) {
         super(posX, posY, fps, mapParams);
-        console.log(this.radius)
+        // console.log(this.radius)
+        console.log(this.fps);
+        console.log(this.ar);
     }
 
     static create(...args) {

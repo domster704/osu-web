@@ -19,7 +19,6 @@ export default class EventEmitter {
         if (this.handlers[name]) {
             for (let i in this.handlers[name]) {
                 let ii = this.handlers[name][i](...data);
-                console.log(ii)
                 if (ii === 'closeFunc' && name === 'mapPlaying') {
                     delete this.handlers[name][i];
                 }

@@ -12,7 +12,7 @@ export default class Map extends OsuArchiveHandler{
             hp: 3.5,
             cs: 3.8,
             od: 8.0,
-            ar: 9.0,
+            ar: 9.5,
         };
 
         this.listNotes = [];
@@ -29,6 +29,7 @@ export default class Map extends OsuArchiveHandler{
         for (let i in Object.keys(this.mapParams)) {
             this.mapParams[Object.keys(this.mapParams)[i]] = mapCharacteristic[i];
         }
+        console.log(this.mapParams);
 
         // Read timing appearance and positions of note, slider and spinner (objects)
         let objects = mapData.slice(mapData.indexOf('[HitObjects]') + 1);

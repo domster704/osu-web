@@ -23,17 +23,17 @@ const config = {
     ar: 1,
 };
 
-// let noteList = [];
-// for (let i = 0; i < 4; i++) {
-//     noteList.push({
-//         note: Note.create(getRandomNumber(app.canvas.width - app.canvas.width / app.aspectRatio, app.canvas.width / app.aspectRatio), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
-//         status: ''
-//     });
-// }
+let noteList = [];
+for (let i = 0; i < 4; i++) {
+    noteList.push({
+        note: Note.create(getRandomNumber(app.canvas.width - app.canvas.width / app.aspectRatio, app.canvas.width / app.aspectRatio), getRandomNumber(100, app.canvas.height - 100), config.ar, app.fps),
+        status: ''
+    });
+}
 
-// for (let i of noteList) {
-//     i.note.draw(app);
-// }
+for (let i of noteList) {
+    i.note.draw(app);
+}
 
 const backgroundImage = new Image();
 backgroundImage.src = "data/image/background/back.jpg";
@@ -118,27 +118,27 @@ app.on('update', () => {
     //     if (reStatNote(noteList[i])) noteList[i] = reStatNote(noteList[i]);
     // }
 
-    if (app.cursor.mouseKeyDown === 1) {
-        firstPos = app.cursor.mousePos;
-        sum = 1;
-    }else if (app.cursor.mouseKeyDown === 4) {
-        secondPos = app.cursor.mousePos;
-        sum === 1 ? sum = 2: sum = 1;
-    }
+    // if (app.cursor.mouseKeyDown === 1) {
+    //     firstPos = app.cursor.mousePos;
+    //     sum = 1;
+    // }else if (app.cursor.mouseKeyDown === 4) {
+    //     secondPos = app.cursor.mousePos;
+    //     sum === 1 ? sum = 2: sum = 1;
+    // }
 
-    if (sum === 2) {
-        slider = Slider.create(500, 400, 600, 200,  app.fps, {
-            hp: 3.5,
-            cs: 3.8,
-            od: 8.0,
-            ar: 9.0,
-        });
-        sum = 0;
-    }
+    // if (sum === 2) {
+    //     slider = Slider.create(500, 400, 600, 200,  app.fps, {
+    //         hp: 3.5,
+    //         cs: 3.8,
+    //         od: 8.0,
+    //         ar: 9.0,
+    //     });
+    //     sum = 0;
+    // }
 
-    if (slider) {
-        slider.drawSlider(app);
-    }
+    // if (slider) {
+    //     slider.drawSlider(app);
+    // }
 
     // const {context} = app.canvas;
     // context.font = "30px Arial";
